@@ -1,0 +1,147 @@
+.form {
+  display: flex;
+  justify-content: center;
+}
+
+.signupForm {
+  margin-top: 40px;
+  background-color: #fff;
+  height: 518.2px;
+  width: 348px;
+  padding: 10px 0px;
+  border: 1px solid #dbdbdb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signupForm__logo {
+  margin: 22px auto 12px;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.signupForm__logo > img {
+  width: 175px;
+  background-color: #fff;
+}
+
+#signUp__text {
+  color: #8e8e8e;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0 40px 10px;
+  text-align: center;
+  background-color: #fff;
+}
+
+#facebook__login,
+#signUp__button {
+  border: 1px solid transparent;
+  background-color: #0095f6;
+  cursor: pointer;
+  padding: 3px 9px;
+  border-radius: 4px;
+  color: #fff;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  width: 268px;
+}
+
+#facebook__login__btnContent {
+  background: none;
+  width: 180px;
+  display: flex;
+  align-items: center;
+}
+
+.or__separator {
+  display: flex;
+  height: 20px;
+  align-items: center;
+  background: #fff;
+  margin: 15px 0px;
+}
+.or__text {
+  color: #8e8e8e;
+  font-size: 12px;
+  font-weight: 500;
+}
+.line {
+  height: 2px;
+  width: 110px;
+  border-bottom: 2px solid #dbdbdb;
+  margin: 0px 10px;
+}
+
+.input__fields {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.input__fields > input {
+  width: 240px;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  margin: 3px 0px;
+}
+.input__fields > input::placeholder {
+  color: #8e8e8e;
+  opacity: 1;
+  font-size: 12px;
+}
+
+#signUp__button {
+  margin-top: 13px;
+  background-color: #b6daf1;
+  padding: 7px 9px;
+}
+
+#tnc {
+  color: #8e8e8e;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 10px 40px;
+  text-align: center;
+  background: none;
+}
+
+#tnc > strong {
+  background: none;
+  font-weight: 600;
+}
+
+.account__exists {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#link_to_login {
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  width: 350px;
+  border: 1px solid #dbdbdb;
+  padding: 10px 0px;
+  height: 47.6px;
+  line-height: 47.6px;
+  background-color: #fff;
+}
+
+#link_to_login > a {
+  text-decoration: none;
+}
+.link_text {
+  background-color: #fff;
+  color: #0095f6 !important;
+}

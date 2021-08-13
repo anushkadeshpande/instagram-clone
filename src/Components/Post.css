@@ -1,0 +1,85 @@
+.picture {
+  max-width: 614px;
+  object-fit: contain;
+  border: 1px solid var(--borders-col);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  background-color: #fff;
+}
+.picture__header {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.picture__header__left {
+  display: flex;
+  background-color: #fff;
+}
+.picture__header__left > ion-icon {
+  font-size: 25px;
+  margin-right: 10px;
+}
+.picture__picture {
+  background-color: #fff;
+}
+.picture__picture > img {
+  width: 100%;
+  object-fit: contain;
+  background-color: #fff;
+}
+.picture__buttons {
+  background-color: #fff;
+}
+.picture__buttons > ion-icon {
+  font-size: 30px;
+  margin: 0px 10px 0px 10px;
+  background-color: #fff;
+}
+
+.heart__button {
+  background-color: red;
+}
+
+.picture__data {
+  background-color: #fff;
+  margin: 0px 15px;
+}
+
+.picture__data > p {
+  font-size: 0.85rem;
+  background-color: #fff;
+  margin: 3px 0px;
+}
+.picture__data > p > strong {
+  background-color: #fff;
+}
+.menu__box {
+  position: absolute;
+  width: 120px;
+  background-color: white;
+  margin-left: -120px;
+  margin-top: -10px;
+  border: 1px solid var(--borders-col);
+}
+
+.delete__button {
+  border: none;
+  outline: none;
+  width: 120px;
+  background-color: #fff;
+  text-align: center;
+  font-size: 12px;
+}
+
+.delete__button:hover {
+  cursor: pointer;
+}
+
+.menu_button,
+.menu {
+  background-color: #fff;
+}

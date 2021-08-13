@@ -1,0 +1,18 @@
+#addPost{
+    outline:none;
+    border:1px solid var(--borders-col);
+    background-color: #fff;
+    padding:0px 15px;
+    border-radius: 50%;
+    position:fixed;
+    bottom: 20px;
+    right:20px;
+    font-size: 50px;
+    font-weight: 500;
+    color:rgb(88, 88, 88);
+    box-shadow:  0px 0px 15px #dadada85;
+  }
+  
+  .posts{
+    margin: 100px 0px;
+  }

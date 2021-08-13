@@ -1,0 +1,55 @@
+.comments_section {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-top: 1px solid var(--borders-col);
+  box-sizing: border-box;
+  padding: 8px 3px;
+  background-color: #fff;
+  margin-top:10px;
+}
+.emoji-button {
+  padding: 10px;
+  height: 25px;
+  background-color: transparent;
+}
+.comments_section > input {
+  border: none;
+  background-color: #fff;
+  font-size: 15px;
+  padding: 0;
+  outline: none;
+  margin: 0px 15px 0px 5px;
+  width: 82%;
+}
+
+.comments_section > button {
+  border: none;
+  background-color: #fff;
+  color: #0094f654;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.comments__list > p,
+.comments__list > strong {
+  background-color: #fff;
+  font-size: 0.85rem;
+  margin: 3px 0px;
+}
+
+.comments__list {
+  margin: 0px 15px;
+  background-color: #fff;
+}
+
+#show_more{
+    background-color: #fff;
+    margin: 3px 0px;
+    color: #8e8e8e;
+    cursor: pointer;
+  }
+
+#show_more:hover{
+  text-decoration: underline;
+}

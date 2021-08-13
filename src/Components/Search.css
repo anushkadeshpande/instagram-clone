@@ -1,0 +1,9 @@
+.search_box{
+    position: absolute;
+    top:50px;
+    left:330px;
+    width: 400px;
+    height: 200px;
+
+    border:1px solid #000;
+}
