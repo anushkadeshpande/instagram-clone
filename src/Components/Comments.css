@@ -6,7 +6,7 @@
   box-sizing: border-box;
   padding: 8px 3px;
   background-color: #fff;
-  margin-top:10px;
+  margin-top: 10px;
 }
 .emoji-button {
   padding: 10px;
@@ -43,13 +43,13 @@
   background-color: #fff;
 }
 
-#show_more{
-    background-color: #fff;
-    margin: 3px 0px;
-    color: #8e8e8e;
-    cursor: pointer;
-  }
+#show_more {
+  background-color: #fff;
+  margin: 3px 0px;
+  color: #8e8e8e;
+  cursor: pointer;
+}
 
-#show_more:hover{
+#show_more:hover {
   text-decoration: underline;
 }

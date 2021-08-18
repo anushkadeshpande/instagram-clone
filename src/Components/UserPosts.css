@@ -1,24 +1,25 @@
 .userPosts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(10px, auto);
+}
+.grid-pic {
+  width: 35vh;
+  height: 35vh;
+  background-size: cover;
+  background-position: center;
+}
+@media screen and (max-width: 1000px) {
+  .userPosts {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     grid-auto-rows: minmax(10px, auto);
+    margin: auto auto;
   }
   .grid-pic {
-    width: 35vh;
-    height: 35vh;
-    background-size: cover;
-    background-position: center;
+    width: 97%;
+    object-fit: contain;
   }
-  @media screen and (max-width: 1000px) {
-    .userPosts {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      grid-auto-rows: minmax(10px, auto);
-    }
-    .grid-pic {
-      width: 100%;
-      object-fit: contain;
-    }
-  }
+}

@@ -1,19 +1,17 @@
 .search_box {
-    position: absolute;
-
-    top:50px;
-    width: 400px;
-
-
-    border:1px solid #000;
+  position: absolute;
+  top: 50px;
+  width: 400px;
+  border: 1px solid #000;
 }
+
 .search_box_hidden {
-    display: none;
+  display: none;
 }
 
-.foundItem{
-    padding: 2px;
-    box-sizing: border-box;
-    border-bottom: 1px solid rgb(175, 175, 175);
-    cursor:pointer
+.foundItem {
+  padding: 2px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgb(175, 175, 175);
+  cursor: pointer;
 }

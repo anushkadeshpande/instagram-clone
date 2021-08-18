@@ -24,20 +24,16 @@ function Notification() {
     userDb.doc(id).update({
       sentRequests: firebase.firestore.FieldValue.arrayRemove(user.id),
     });
-    
+
     userDb.doc(user.id).update({
       followRequests: firebase.firestore.FieldValue.arrayRemove(id),
     });
-
-    
   };
   const acceptRequest = (id) => {
-    userDb
-      .doc(id)
-      .update({
-        following: firebase.firestore.FieldValue.arrayUnion(user.id),
-        sentRequests: firebase.firestore.FieldValue.arrayRemove(user.id),
-      });
+    userDb.doc(id).update({
+      following: firebase.firestore.FieldValue.arrayUnion(user.id),
+      sentRequests: firebase.firestore.FieldValue.arrayRemove(user.id),
+    });
 
     userDb.doc(user.id).update({
       followers: firebase.firestore.FieldValue.arrayUnion(id),
@@ -60,13 +56,30 @@ function Notification() {
         </div>
       ) : (
         receivedRequests.map((req) => (
-          <>
-            <h5>
-              {req.data.name} ({req.data.username}) has requested to follow you.
-            </h5>
-            <button onClick={() => {acceptRequest(req.id)}}>Confirm</button>
-            <button onClick={() => {deleteRequest(req.id)}}>Delete</button>
-          </>
+          <div className="requests">
+            <img
+              src="http://www.defineinternational.com/wp-content/uploads/2014/06/dummy-profile.png"
+              alt=""
+            />
+            <p>
+              <strong>{req.data.username} </strong>({req.data.name}) has
+              requested to follow you.
+            </p>
+            <button
+              onClick={() => {
+                acceptRequest(req.id);
+              }}
+            >
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </button>
+            <button
+              onClick={() => {
+                deleteRequest(req.id);
+              }}
+            >
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </div>
         ))
       )}
     </div>

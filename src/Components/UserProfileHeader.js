@@ -19,16 +19,11 @@ function UserProfileHeader({
 }) {
   const loggedUser = useSelector(selectUser);
 
-  const getFollowRequestStatus = () => {
-    // of use only when user is not followed
-    if (loggedUser.sentRequests?.includes(uid)) return "Requested";
-    // if not requested then not following
-    else return "Follow";
-  };
-
   const getFollowStatus = () => {
     // considered followed
     if (loggedUser.following?.includes(uid)) return "Following";
+    // if requested
+    else if (loggedUser.sentRequests?.includes(uid)) return "Requested";
     // if not already foll
     else return "Follow";
   };
@@ -36,13 +31,9 @@ function UserProfileHeader({
   const [modalIsOpen, setIsOpen] = useState(false);
   const [dataIds, setDataIds] = useState([]);
   const [modalData, setModalData] = useState([]);
-  const [isFollowRequestSent, setSendFollowRequest] = useState(
-    getFollowRequestStatus
-  );
   const [isFollowing, setIsFollowing] = useState(getFollowStatus);
 
   useEffect(() => {
-    setSendFollowRequest(getFollowRequestStatus);
     setIsFollowing(getFollowStatus);
   }, [uid]);
 
@@ -72,22 +63,20 @@ function UserProfileHeader({
     },
   };
   const history = useHistory();
-
-  // console.log(loggedUser);
   const sendFollowRequest = () => {
     // not already following, so send a follow request
-    if (isFollowRequestSent === "Follow") {
+    if (isFollowing === "Follow") {
       userDb.doc(uid).update({
         followRequests: firebase.firestore.FieldValue.arrayUnion(loggedUser.id),
       });
       userDb.doc(loggedUser.id).update({
         sentRequests: firebase.firestore.FieldValue.arrayUnion(uid),
       });
-      setSendFollowRequest("Requested");
+      setIsFollowing("Requested");
     }
 
     // already sent a request, if clicked, request will be deleted
-    else {
+    else if (isFollowing === "Requested") {
       userDb.doc(uid).update({
         followRequests: firebase.firestore.FieldValue.arrayRemove(
           loggedUser.id
@@ -96,7 +85,7 @@ function UserProfileHeader({
       userDb.doc(loggedUser.id).update({
         sentRequests: firebase.firestore.FieldValue.arrayRemove(uid),
       });
-      setSendFollowRequest("Follow");
+      setIsFollowing("Follow");
     }
   };
 
@@ -107,7 +96,7 @@ function UserProfileHeader({
         followers: firebase.firestore.FieldValue.arrayRemove(loggedUser.id),
       });
       userDb.doc(loggedUser.id).update({
-        followeing: firebase.firestore.FieldValue.arrayRemove(uid),
+        following: firebase.firestore.FieldValue.arrayRemove(uid),
       });
 
       setIsFollowing("Follow");
@@ -136,9 +125,7 @@ function UserProfileHeader({
                 Log Out
               </button>
             ) : mode === "NotFollowed" ? (
-              <button onClick={() => sendFollowRequest()}>
-                {isFollowRequestSent}
-              </button>
+              <button onClick={() => sendFollowRequest()}>{isFollowing}</button>
             ) : (
               <button onClick={() => unfollowUser()}>{isFollowing}</button>
             )}

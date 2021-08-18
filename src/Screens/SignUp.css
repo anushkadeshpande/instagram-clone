@@ -51,11 +51,12 @@
   font-weight: 600;
   width: 268px;
 }
-.inactive{
+.inactive {
   background-color: #b6daf1 !important;
 }
 
-.active,#facebook__login{
+.active,
+#facebook__login {
   background-color: #0095f6;
 }
 #facebook__login__btnContent {

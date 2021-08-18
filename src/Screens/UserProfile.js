@@ -22,7 +22,12 @@ function UserProfile() {
         postDb
           .doc(post)
           .get()
-          .then((doc) => setPosts((prevState) => [{id:doc.id,data:doc.data()}, ...prevState]));
+          .then((doc) =>
+            setPosts((prevState) => [
+              { id: doc.id, data: doc.data() },
+              ...prevState,
+            ])
+          );
       });
     };
 
@@ -51,12 +56,13 @@ function UserProfile() {
             .doc(postId)
             .get()
             .then((doc) =>
-              setFollowedAcc((prevState) => [...prevState, {id:doc.id,data:doc.data()}])
+              setFollowedAcc((prevState) => [
+                { id: doc.id, data: doc.data() },
+                ...prevState,
+              ])
             );
         });
       };
-      console.log(followedAccount[0]);
-
       if (followedAccount.length === 0) {
         //user is not followed
         setMode("NotFollowed");
@@ -104,7 +110,9 @@ function UserProfile() {
             {
               // if the other account is not followed
               profileMode === "NotFollowed" ? (
-                <h1>Follow {search?.username} to view their posts.</h1>
+                <h1 className="follow-warning">
+                  Follow {search?.data.username} to view their posts.
+                </h1>
               ) : (
                 // if the other account is followed
                 <UserPosts posts={followedAcc} />

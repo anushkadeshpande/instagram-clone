@@ -4,9 +4,8 @@ import "./UserPosts.css";
 function UserPosts({ posts }) {
   const [modalPost, setModalPost] = useState({});
   const [modalIsOpen, setIsOpen] = useState(false);
-  console.log(posts)
-  const openPostModal = (post,id) => {
-    setModalPost({id:id,post:post});
+  const openPostModal = (post, id) => {
+    setModalPost({ id: id, post: post });
     setIsOpen(true);
   };
   return (
@@ -16,7 +15,7 @@ function UserPosts({ posts }) {
           key={post?.id}
           className="grid-pic"
           style={{ backgroundImage: `url(${post?.data?.pic})` }}
-          onClick={() => openPostModal(post.data,post.id)}
+          onClick={() => openPostModal(post.data, post.id)}
         ></div>
       ))}
       {modalIsOpen ? (

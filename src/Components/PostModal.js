@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "./PostModal.css";
-import firebase from "firebase"
+import firebase from "firebase";
 import PictureButtons from "./PictureButtons";
-import { postDb, userDb } from "../firebase";
+import { postDb, userDb, storage } from "../firebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import Smile from "../smile.svg";
@@ -14,16 +14,20 @@ function PostModal({ modalIsOpen, setIsOpen, modalPost, setModalPost }) {
     user?.likedPosts?.includes(modalPost.id)
   );
   const [commentInput, setCommentInput] = useState("");
-  const addComment = () => {postDb.doc(modalPost.id).update({
-    comments: firebase.firestore.FieldValue.arrayUnion({ sender: user.userName,
-      comment: commentInput}),
-  })
+  const addComment = () => {
+    postDb.doc(modalPost.id).update({
+      comments: firebase.firestore.FieldValue.arrayUnion({
+        sender: user.userName,
+        comment: commentInput,
+      }),
+    });
 
-setCommentInput("");};
+    setCommentInput("");
+  };
   useEffect(() => {
     setPostLike(user?.likedPosts?.includes(modalPost.id));
   }, [user?.likedPost]);
-  console.log(user?.likedPosts?.includes(modalPost.id));
+
   const customStyles = {
     content: {
       top: "50%",
@@ -42,24 +46,35 @@ setCommentInput("");};
     setIsOpen(false);
     setModalPost({});
   };
-  /* const deletePost = () => {
-if (modalPost.pic.startsWith("https://firebasestorage.googleapis.com/v0/b/instagram-4.appspot.com")) {
-    storage.refFromURL(modalPost.pic).delete()
-  }
-  user.likedPosts?.map(likedPost => {
-    console.log("liked:" , likedPost, "to match: ", id)
-    if (likedPost === id)
-      userDb.doc(user.id).update({ likedPosts: firebase.firestore.FieldValue.arrayRemove(id) })
-  })
-  user.posts?.map(post => {
-    console.log("post:" , post, "to match: ", id)
-    if (post === id)
-      userDb.doc(user.id).update({ posts: firebase.firestore.FieldValue.arrayRemove(id) })
-  })
-  postDb.doc(id).delete()
+  const deletePost = () => {
+    if (
+      modalPost.post.pic.startsWith(
+        "https://firebasestorage.googleapis.com/v0/b/instagram-4.appspot.com"
+      )
+    ) {
+      storage.refFromURL(modalPost.pic).delete();
+    }
+    user.likedPosts?.map((likedPost) => {
+      if (likedPost === modalPost.id)
+        userDb
+          .doc(user.id)
+          .update({
+            likedPosts: firebase.firestore.FieldValue.arrayRemove(modalPost.id),
+          });
+    });
+    user.posts?.map((post) => {
+      if (post === modalPost.id)
+        userDb
+          .doc(user.id)
+          .update({
+            posts: firebase.firestore.FieldValue.arrayRemove(modalPost.id),
+          });
+    });
+    postDb.doc(modalPost.id).delete();
 
-    //  console.log(modalPost);
-  };*/
+    closeModal();
+    window.alert("Post deleted Successfully....")
+  };
   return (
     <div>
       <Modal
@@ -85,7 +100,14 @@ if (modalPost.pic.startsWith("https://firebasestorage.googleapis.com/v0/b/instag
               <p>
                 <strong>{modalPost.post.username} </strong>
               </p>
-              <button>
+              <button
+                style={
+                  modalPost.post.uid === user.id
+                    ? { display: "block" }
+                    : { display: "none" }
+                }
+                onClick={() => deletePost()}
+              >
                 <ion-icon name="trash-outline"></ion-icon>
               </button>
             </div>
@@ -113,7 +135,7 @@ if (modalPost.pic.startsWith("https://firebasestorage.googleapis.com/v0/b/instag
               </p>
             </div>
             <div className="separator"></div>
-            {console.log(modalPost)}
+
             <div className="post-info__comments">
               <p>
                 {modalPost.post.comments?.map((comment) => (

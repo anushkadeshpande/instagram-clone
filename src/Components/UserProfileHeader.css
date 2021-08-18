@@ -1,80 +1,89 @@
 .userProfile__header {
-    display: flex;
-    border-bottom: 1px solid black;
-    margin-bottom: 20px;
-    margin-top: 80px;
-  }
+  display: flex;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+  margin-top: 80px;
+}
+.userProfile__header__image > img {
+  height: 20vh;
+  border-radius: 100px;
+  margin: 0px 6vw;
+}
+
+.userProfile__header__details {
+  margin: 0px 5vw;
+}
+
+.user__data__header {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 40px;
+}
+
+.user__data__header > p {
+  font-size: xx-large;
+  font-weight: lighter;
+}
+
+.user__data__header > button {
+  outline: none;
+  border: 1px solid var(--borders-col);
+  border-radius: 5px;
+  padding: 0px 10px;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.user__data__header > button:hover {
+  transition: 0.2s ease;
+  background-color: rgb(218, 218, 218);
+}
+.user__data {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin: 10px 0px;
+}
+
+.modal-content {
+  width: 25vw;
+}
+.modal-content > button {
+  position: fixed;
+  right: 0;
+  top: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 5px;
+  background: none;
+  font-size: large;
+}
+.list-item {
+  display: flex;
+  margin: 3px 1px;
+  padding: 3px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--borders-col);
+  align-items: center;
+  font-size: large;
+}
+
+.list-item > p {
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 1000px) {
   .userProfile__header__image > img {
-    height: 140px;
-    width: 140px;
+    height: 10vh;
     border-radius: 100px;
-    margin: 0px 8vw;
+    margin: 0px 1vw;
   }
-  
-  .userProfile__header__details {
-    margin: 0px 5vw;
-  }
-  
-  .user__data__header {
-    display: flex;
-    justify-content: space-between;
-    width: 200px;
-    height: 40px;
-  }
-  
-  .user__data__header > p {
-    font-size: xx-large;
-    font-weight: lighter;
-  }
-  
-  .user__data__header > button {
-    outline: none;
-    border: 1px solid var(--borders-col);
-    border-radius: 5px;
-    padding: 0px 10px;
-    height: 30px;
-    font-size: 12px;
-    font-weight: 600;
-    margin-top: 10px;
-  }
-  .user__data__header > button:hover {
-    transition: 0.2s ease;
-    background-color: rgb(218, 218, 218);
-  }
+
   .user__data {
-    width: 250px;
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    margin: 10px 0px;
+    width: 120%;
   }
-  
-  
-
-.modal-content{
-    width:25vw;
-}
-.modal-content>button{
-    position:fixed;
-    right: 0;
-    top: 0;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 5px;
-    background: none;
-    font-size: large;
-}
-.list-item{
-    display:flex;
-    margin:3px 1px;
-    padding: 3px;
-    cursor:pointer;
-    border-bottom:1px solid var(--borders-col);
-    align-items: center;
-    font-size: large;
-}
-
-.list-item>p{
-    margin-left:10px
 }

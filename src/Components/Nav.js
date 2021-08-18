@@ -46,13 +46,8 @@ function Nav() {
               name={location.pathname === "/home" ? "home" : "home-outline"}
             ></ion-icon>
           </Link>
-          <ion-icon
+          <ion-icon onClick={()=> window.alert("Feature Coming Soon...")}
             name={location.pathname === "/message" ? "send" : "send-outline"}
-          ></ion-icon>
-          <ion-icon
-            name={
-              location.pathname === "/explore" ? "compass" : "compass-outline"
-            }
           ></ion-icon>
           <Link to="/notifications">
             <ion-icon
