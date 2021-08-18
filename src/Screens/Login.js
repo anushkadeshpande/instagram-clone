@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { auth } from '../firebase'
 import FacebookIcon from '@material-ui/icons/Facebook';
@@ -6,7 +6,8 @@ import './Login.css'
 function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
-
+    const [ isEmailSet, setEmailStatus ] = useState(false)
+    const [ isPasswordSet, setPasswordStatus ] = useState(false)
     const logIn = (e) => {
         e.preventDefault()
         auth.signInWithEmailAndPassword(
@@ -25,10 +26,10 @@ function Login() {
                     </div>
 
                     <div className="input__fields">
-                        <input ref={emailRef} type="text" placeholder="Phone Number, username or email" />
-                        <input ref={passwordRef} type="password" placeholder="Password" />
+                        <input ref={emailRef} type="text" placeholder="Phone Number, username or email" onChange={(e)=>{ if(e.target.value !== "") setEmailStatus(true); else setEmailStatus(false)}}/>
+                        <input ref={passwordRef} type="password" placeholder="Password" onChange={(e)=>{ if(e.target.value !== "") setPasswordStatus(true); else setPasswordStatus(false)}}/>
                     </div>
-                    <button id="signUp__button" onClick={(e) => logIn(e)}>Log In</button>
+                    <button id="signUp__button" className={(isEmailSet && isPasswordSet)?"active" : "inactive"} onClick={(e) => logIn(e)}>Log In</button>
                     <div className="or__separator">
                         <div className="line"></div>
                         <span className="or__text">OR</span>

@@ -16,4 +16,5 @@ const storage = firebase.storage();
 
 const postDb = db.collection('posts')
 const userDb = db.collection('users')
+
 export { db, auth, storage, postDb, userDb };

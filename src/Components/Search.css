@@ -1,9 +1,19 @@
-.search_box{
+.search_box {
     position: absolute;
+
     top:50px;
-    left:330px;
     width: 400px;
-    height: 200px;
+
 
     border:1px solid #000;
+}
+.search_box_hidden {
+    display: none;
+}
+
+.foundItem{
+    padding: 2px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgb(175, 175, 175);
+    cursor:pointer
 }

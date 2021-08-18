@@ -8,7 +8,7 @@ import SignUp from './Screens/SignUp';
 import Home from './Screens/Home'
 import Login from './Screens/Login'
 import UserProfile from './Screens/UserProfile';
-import PublicView from './Screens/PublicView';
+import Notification from './Screens/Notification'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 function App() {
   const user = useSelector(selectUser);
@@ -27,8 +27,12 @@ function App() {
               userName: snapshot.docs[0]?.data().username,
               name: snapshot.docs[0]?.data().name,
               id:snapshot.docs[0]?.id,
-              likedPosts: snapshot.docs[0]?.data().likedPosts,
-              posts: snapshot.docs[0]?.data().posts
+              likedPosts: snapshot.docs[0]?.data().likedPosts? snapshot.docs[0]?.data().likedPosts : [],
+              posts: snapshot.docs[0]?.data().posts? snapshot.docs[0]?.data().posts : [],
+              followRequests: snapshot.docs[0]?.data().followRequests? snapshot.docs[0]?.data().followRequests : [],
+              sentRequests: snapshot.docs[0]?.data().sentRequests? snapshot.docs[0]?.data().sentRequests : [],
+              followers: snapshot.docs[0]?.data().followers? snapshot.docs[0]?.data().followers : [],
+              following: snapshot.docs[0]?.data().following? snapshot.docs[0]?.data().following : []   
             }))
         )}
           
@@ -52,7 +56,8 @@ function App() {
         <Route path='/login' component={Login} />
         <Route path='/home' component={Home} />
         <Route path='/user' component={UserProfile} />
-        <Route path='/searchResult' component={PublicView} />
+        <Route path='/me' component={UserProfile} />
+        <Route path='/notifications' component={Notification} />
         {!user ?
           <Redirect to='/' exact />
           :

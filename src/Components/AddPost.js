@@ -59,7 +59,8 @@ function AddPost({ modalIsOpen, setIsOpen }) {
                             caption: caption,
                             likes: 0,
                             timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
-                            comments: []
+                            comments: [],
+                            uid: user.id
                         }
                         db.collection('posts').add(post)
                         .then(doc => userDb.doc(user.id).update({ posts: firebase.firestore.FieldValue.arrayUnion(doc.id) }))
@@ -81,7 +82,8 @@ function AddPost({ modalIsOpen, setIsOpen }) {
                 caption: caption,
                 likes: 0,
                 timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
-                comments:[]
+                comments:[],
+                uid: user.id
             }
             postDb.add(post)
             .then(doc => userDb.doc(user.id).update({ posts: firebase.firestore.FieldValue.arrayUnion(doc.id) }))

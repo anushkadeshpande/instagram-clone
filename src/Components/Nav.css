@@ -61,10 +61,32 @@
     font-size: 25px;
     background-color: #fff;
 }
+
+.search_area{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .nav__search{
     text-align: center;
     padding:7px 30px 7px 30px;
     box-sizing: border-box;   
-    border: 1px solid var(--borders-col);
+    border: none;
     outline:none;
+}
+.search_area_input{
+    display: flex;
+    border: 1px solid var(--borders-col);
+}
+
+.search_area_input > button{
+    outline: none;
+    cursor: pointer;
+    border: none;
+    margin-right: 3px;
+    box-sizing: border-box;
+}
+.nav__search__results{
+    height: 100px;
 }

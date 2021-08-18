@@ -10,9 +10,10 @@ function SignUp() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const [name, setName] = useState("")
-    const [username, setUsername] = useState()
+    const [username, setUsername] = useState("")
     const [signedUp, setSignedUp] = useState(false)
-
+    const [ isEmailSet, setEmailStatus ] = useState(false)
+    const [ isPasswordSet, setPasswordStatus ] = useState(false)
     const signUp = (e) => {
         e.preventDefault();
         // auth
@@ -24,12 +25,20 @@ function SignUp() {
                 userId: authUser.user.uid,
                 name: name,
                 username: username,
-                posts: []
-            })
-            setSignedUp(true)
+                posts: [],
+                followers: [],
+                following: [],
+                followRequests: []
+            }).then(
+                () => {
+                    setSignedUp(true)
+                }
+            )
+            
         }).catch((error) => {
             alert(error.message);
         });
+        
     }
 
     return (
@@ -51,12 +60,16 @@ function SignUp() {
                         <div className="line"></div>
                     </div>
                     <div className="input__fields">
-                        <input ref={emailRef} type="text" placeholder="Mobile Number or Email" />
+                        <input ref={emailRef} type="text" placeholder="Mobile Number or Email" 
+                            onChange={(e)=>{ if(e.target.value !== "") setEmailStatus(true); else setEmailStatus(false)}}/>
+                        
                         <input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Full Name" />
                         <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" />
-                        <input ref={passwordRef} type="password" placeholder="Password" />
+                        
+                        <input ref={passwordRef} type="password" placeholder="Password" 
+                            onChange={(e)=>{ if(e.target.value !== "") setPasswordStatus(true);else setPasswordStatus(false)}} />
                     </div>
-                    <button id="signUp__button">Sign Up</button>
+                    <button id="signUp__button" className={(name && username && isEmailSet && isPasswordSet)?"active" : "inactive"}  >Sign Up</button>
                     <p id="tnc">By signing up, you agree to our <strong>Terms</strong> ,
                         <strong> Data Policy</strong> and
                         <strong> Cookies Policy</strong> .

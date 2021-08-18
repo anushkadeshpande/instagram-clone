@@ -31,18 +31,6 @@
   object-fit: contain;
   background-color: #fff;
 }
-.picture__buttons {
-  background-color: #fff;
-}
-.picture__buttons > ion-icon {
-  font-size: 30px;
-  margin: 0px 10px 0px 10px;
-  background-color: #fff;
-}
-
-.heart__button {
-  background-color: red;
-}
 
 .picture__data {
   background-color: #fff;
@@ -57,29 +45,4 @@
 .picture__data > p > strong {
   background-color: #fff;
 }
-.menu__box {
-  position: absolute;
-  width: 120px;
-  background-color: white;
-  margin-left: -120px;
-  margin-top: -10px;
-  border: 1px solid var(--borders-col);
-}
 
-.delete__button {
-  border: none;
-  outline: none;
-  width: 120px;
-  background-color: #fff;
-  text-align: center;
-  font-size: 12px;
-}
-
-.delete__button:hover {
-  cursor: pointer;
-}
-
-.menu_button,
-.menu {
-  background-color: #fff;
-}

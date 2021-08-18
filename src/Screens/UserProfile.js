@@ -1,39 +1,120 @@
-import React, { useState, useEffect } from 'react'
-import { auth } from '../firebase'
-import { useHistory } from 'react-router-dom'
-import './UserProfile.css'
-import { useSelector } from 'react-redux'
-import { selectUser } from '../features/userSlice';
-import { db, postDb, userDb } from '../firebase'
-import UserProfileHeader from '../Components/UserProfileHeader'
+import React, { useState, useEffect } from "react";
+import "./UserProfile.css";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
+import { postDb } from "../firebase";
+import UserProfileHeader from "../Components/UserProfileHeader";
+import { selectSearched } from "../features/searchSlice";
+
+import UserPosts from "../Components/UserPosts";
 function UserProfile() {
-    const user = useSelector(selectUser);
-    const history = useHistory()
-    //console.log(user)
-    const [posts, setPosts] = useState([])
+  const search = useSelector(selectSearched);
+  const user = useSelector(selectUser);
+  const [profileMode, setMode] = useState("");
+  const [followedAcc, setFollowedAcc] = useState([]);
 
-    useEffect(() => {
+  const [posts, setPosts] = useState([]);
 
-        const fetchPosts = () => {
-            setPosts([])
-            user?.posts?.map(post => {
-                postDb.doc(post).get().then(doc => setPosts(prevState => [doc.data(), ...prevState])
-                )
-            })
-        }
-        fetchPosts()
-    }, [])
+  useEffect(() => {
+    const fetchPosts = () => {
+      setPosts([]);
+      user?.posts?.map((post) => {
+        postDb
+          .doc(post)
+          .get()
+          .then((doc) => setPosts((prevState) => [{id:doc.id,data:doc.data()}, ...prevState]));
+      });
+    };
 
-    return (
-        <div className="userProfile">
-           <UserProfileHeader user={user} username={user.userName} postsCount={posts.length} mode="myProfile"/>
+    // if it is my account
+    if (
+      window.location.pathname === "/me" ||
+      search?.data.username === user.userName
+    ) {
+      setMode("MyAccount");
+      fetchPosts();
+    }
 
-            <div className="userPosts">
-                {posts.map(post => <div className="grid-pic" style={{ backgroundImage: `url(${post?.pic})` }}>
-                </div>)}
-            </div>
-        </div>
-    )
+    // if it is others account
+    else {
+      setFollowedAcc([]);
+
+      // check if it is followed
+      const followedAccount = user.following.filter(
+        (following) => following === search?.id
+      );
+
+      //if it is followed, grab data form search
+      const grabPosts = () => {
+        search.data.posts?.map((postId) => {
+          postDb
+            .doc(postId)
+            .get()
+            .then((doc) =>
+              setFollowedAcc((prevState) => [...prevState, {id:doc.id,data:doc.data()}])
+            );
+        });
+      };
+      console.log(followedAccount[0]);
+
+      if (followedAccount.length === 0) {
+        //user is not followed
+        setMode("NotFollowed");
+      } else {
+        //user is followed
+        grabPosts();
+        setMode("Followed");
+      }
+    }
+  }, [search]);
+
+  return (
+    <div className="userProfile">
+      {
+        // if visiting my account
+        profileMode === "MyAccount" ? (
+          <>
+            <UserProfileHeader
+              uid={user.id}
+              user={user}
+              username={user.userName}
+              postsCount={posts?.length}
+              followers={user.followers ? user.followers.length : 0}
+              following={user.following ? user.following.length : 0}
+              mode="myProfile"
+            />
+            <UserPosts posts={posts} />
+          </>
+        ) : (
+          //others account
+          <>
+            <UserProfileHeader
+              uid={search?.id}
+              user={search?.data}
+              username={search?.data.username}
+              postsCount={search?.data.posts.length}
+              followers={
+                search?.data.followers ? search?.data.followers.length : 0
+              }
+              following={
+                search?.data.following ? search?.data.following.length : 0
+              }
+              mode={profileMode}
+            />
+            {
+              // if the other account is not followed
+              profileMode === "NotFollowed" ? (
+                <h1>Follow {search?.username} to view their posts.</h1>
+              ) : (
+                // if the other account is followed
+                <UserPosts posts={followedAcc} />
+              )
+            }
+          </>
+        )
+      }
+    </div>
+  );
 }
 
-export default UserProfile
+export default UserProfile;
