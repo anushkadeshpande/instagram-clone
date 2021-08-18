@@ -66,12 +66,14 @@ function UserProfileHeader({
   const sendFollowRequest = () => {
     // not already following, so send a follow request
     if (isFollowing === "Follow") {
-      userDb.doc(uid).update({
-        followRequests: firebase.firestore.FieldValue.arrayUnion(loggedUser.id),
-      });
       userDb.doc(loggedUser.id).update({
         sentRequests: firebase.firestore.FieldValue.arrayUnion(uid),
-      });
+      }).then(() => {
+        userDb.doc(uid).update({
+          followRequests: firebase.firestore.FieldValue.arrayUnion(loggedUser.id),
+        });
+      })
+      
       setIsFollowing("Requested");
     }
 

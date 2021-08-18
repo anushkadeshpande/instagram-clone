@@ -9,7 +9,7 @@ import { selectSearched } from "../features/searchSlice";
 import UserPosts from "../Components/UserPosts";
 function UserProfile() {
   const user = useSelector(selectUser);
-  if (!user) window.location = "https://instagram-4.netlify.app/";
+  if (!user) window.location = "/";
   const search = useSelector(selectSearched);
   const [profileMode, setMode] = useState("");
   const [followedAcc, setFollowedAcc] = useState([]);

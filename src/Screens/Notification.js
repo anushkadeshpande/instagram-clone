@@ -6,7 +6,7 @@ import { userDb } from "../firebase";
 import firebase from "firebase";
 function Notification() {
   const user = useSelector(selectUser);
-  if (!user) window.location = "https://instagram-4.netlify.app/";
+  if (!user) window.location = "/";
   const [receivedRequests, setRecievedRequests] = useState([]);
   useEffect(() => {
     user?.followRequests?.map((followRequest) => {

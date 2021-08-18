@@ -17,7 +17,7 @@ function Home() {
   const posts = useSelector(selectPosts);
   const dispatch = useDispatch();
   dispatch(setSearch(null));
-  if (!user) window.location = "https://instagram-4.netlify.app/";
+  if (!user) window.location = "/";
   const openModal = () => setIsOpen(true);
   const openSearchModal = () => setSearchOpen(true);
   useEffect(() => {
