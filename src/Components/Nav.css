@@ -89,3 +89,11 @@
 .nav__search__results {
   height: 100px;
 }
+
+.dot{
+  background-color: red;
+  height: 5px;
+  width: 5px;
+  border-radius: 50px;
+  margin: auto;
+}

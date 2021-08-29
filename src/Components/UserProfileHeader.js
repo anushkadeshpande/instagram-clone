@@ -172,8 +172,8 @@ function UserProfileHeader({
                 {modalData?.map((userdata) => (
                   <div className="list-item">
                     <ion-icon name="person-circle-outline"></ion-icon>
-                    <p>{userdata.username}</p>
-                    <p>{userdata.name}</p>
+                    <p>{userdata?.username}</p>
+                    <p>{userdata?.name}</p>
                   </div>
                 ))}
               </div>

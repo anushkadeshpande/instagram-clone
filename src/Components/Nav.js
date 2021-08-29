@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import "./Nav.css";
 import { Link, useLocation } from "react-router-dom";
 import Search from "./Search";
+import { selectUser } from "../features/userSlice";
+import { useSelector } from "react-redux";
+
 function Nav() {
   const [searchBox, setSearchBox] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   const location = useLocation();
+  const user = useSelector(selectUser);
 
   return (
     <div className="navbar">
@@ -50,6 +54,7 @@ function Nav() {
             name={location.pathname === "/message" ? "send" : "send-outline"}
           ></ion-icon>
           <Link to="/notifications">
+          <>
             <ion-icon
               name={
                 location.pathname === "/notifications"
@@ -57,6 +62,9 @@ function Nav() {
                   : "heart-outline"
               }
             ></ion-icon>
+            <div className="dot" style={user?.followRequests?.length === 0?{display:"none"}:{display:"block"}}></div>
+          </>
+          {console.log(user.followRequests)}
           </Link>
           <Link to="/me">
             <ion-icon
