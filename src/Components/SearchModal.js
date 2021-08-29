@@ -25,7 +25,7 @@ function SearchModal({ searchModalIsOpen, setSearchOpen }) {
       setFoundUsers([]);
     } else {
       users.map((user) => {
-        if (user.data.username.includes(searchTerm)) {
+        if (user.data.username.toLowerCase().includes(searchTerm.toLowerCase())) {
           setFoundUsers((prevState) => [...prevState, user]);
         }
       });
