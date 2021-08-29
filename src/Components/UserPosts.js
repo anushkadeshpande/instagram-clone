@@ -14,7 +14,7 @@ function UserPosts({ posts }) {
         <div
           key={post?.id}
           className="grid-pic"
-          style={{ backgroundImage: `url(${post?.data?.pic})` }}
+          style={{ backgroundImage: `url(${post.data.pic})` }}
           onClick={() => openPostModal(post.data, post.id)}
         ></div>
       ))}

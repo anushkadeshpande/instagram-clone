@@ -24,7 +24,7 @@ function Search({ searchTerm }) {
       setFoundUsers([]);
     } else {
       users.map((user) => {
-        if (user.data.username.includes(searchTerm)) {
+        if (user.data.username.toLowerCase().includes(searchTerm)) {
           setFoundUsers((prevState) => [...prevState, user]);
         }
       });

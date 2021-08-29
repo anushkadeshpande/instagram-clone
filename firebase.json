@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "firebase":"instagram-4",
     "public": "build",
     "ignore": [
       "firebase.json",

@@ -8,5 +8,5 @@ export default configureStore({
     posts: postReducer,
     searchedAcc: searchReducer
   },
-  devTools: false,
+  devTools: true,
 });

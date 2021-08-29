@@ -38,7 +38,7 @@ function Nav() {
               <ion-icon name="close-outline"></ion-icon>
             </button>
           </div>
-          {searchBox ? <Search searchTerm={searchTerm} /> : ""}
+          {searchBox ? <Search searchTerm={searchTerm.toLowerCase()} /> : ""}
         </div>
         <div className="nav__buttons">
           <Link to="/home">
