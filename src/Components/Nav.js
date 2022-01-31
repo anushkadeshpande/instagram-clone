@@ -64,7 +64,6 @@ function Nav() {
             ></ion-icon>
             <div className="dot" style={user?.followRequests?.length === 0?{display:"none"}:{display:"block"}}></div>
           </>
-          {console.log(user.followRequests)}
           </Link>
           <Link to="/me">
             <ion-icon
