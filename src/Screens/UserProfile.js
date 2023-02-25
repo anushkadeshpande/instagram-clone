@@ -73,7 +73,7 @@ function UserProfile() {
         setMode("Followed");
       }
     }
-  }, [search]);
+  }, [search, user?.posts]);
 
   return (
     <div className="userProfile">

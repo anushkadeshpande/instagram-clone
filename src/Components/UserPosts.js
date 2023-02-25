@@ -18,6 +18,7 @@ function UserPosts({ posts }) {
           onClick={() => openPostModal(post.data, post.id)}
         ></div>
       ))}
+      
       {modalIsOpen ? (
         <PostModal
           modalIsOpen={modalIsOpen}

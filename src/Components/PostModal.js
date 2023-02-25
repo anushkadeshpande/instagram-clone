@@ -8,12 +8,17 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import Smile from "../smile.svg";
 
+
+
 function PostModal({ modalIsOpen, setIsOpen, modalPost, setModalPost }) {
   const user = useSelector(selectUser);
+  const [likes, setLikes] = useState(modalPost.post.likes)
   const [postLike, setPostLike] = useState(
     user?.likedPosts?.includes(modalPost.id)
   );
+
   const [commentInput, setCommentInput] = useState("");
+  const [previousPostLike,setPreviousPostLike] = useState(!postLike);
   const addComment = () => {
     postDb.doc(modalPost.id).update({
       comments: firebase.firestore.FieldValue.arrayUnion({
@@ -21,12 +26,31 @@ function PostModal({ modalIsOpen, setIsOpen, modalPost, setModalPost }) {
         comment: commentInput,
       }),
     });
-
     setCommentInput("");
   };
+
+  const [postComments, setPostComments] = useState([])
   useEffect(() => {
-    setPostLike(user?.likedPosts?.includes(modalPost.id));
-  }, [user?.likedPost]);
+    //setPostLike(user?.likedPosts?.includes(modalPost.id));
+    postDb.where(firebase.firestore.FieldPath.documentId(), '==', modalPost.id).onSnapshot((snapshot) => {
+        setPostComments(
+          snapshot.docs.map((doc) => ({
+            comments: doc.data().comments
+          }))
+        )
+      
+    });
+  }, [user?.postComments]);
+
+
+
+  const getLikes = () => {
+    postDb.where(firebase.firestore.FieldPath.documentId(), '==', modalPost.id).onSnapshot((snapshot) => {
+      snapshot.docs.map((doc) => setLikes(doc.data().likes))
+
+  console.log("Like status changed")
+  });
+}
 
   const customStyles = {
     content: {
@@ -42,17 +66,20 @@ function PostModal({ modalIsOpen, setIsOpen, modalPost, setModalPost }) {
       alignItems: "center",
     },
   };
+
   const closeModal = () => {
     setIsOpen(false);
     setModalPost({});
   };
+  
   const deletePost = () => {
     if (
       modalPost.post.pic.startsWith(
         "https://firebasestorage.googleapis.com/v0/b/instagram-4.appspot.com"
       )
     ) {
-      storage.refFromURL(modalPost.pic).delete();
+      console.log(modalPost.post.pic)
+      storage.refFromURL(modalPost.post.pic).delete();
     }
     user.likedPosts?.map((likedPost) => {
       if (likedPost === modalPost.id)
@@ -62,6 +89,7 @@ function PostModal({ modalIsOpen, setIsOpen, modalPost, setModalPost }) {
             likedPosts: firebase.firestore.FieldValue.arrayRemove(modalPost.id),
           });
     });
+
     user.posts?.map((post) => {
       if (post === modalPost.id)
         userDb
@@ -71,10 +99,11 @@ function PostModal({ modalIsOpen, setIsOpen, modalPost, setModalPost }) {
           });
     });
     postDb.doc(modalPost.id).delete();
-
+    
     closeModal();
     window.alert("Post deleted Successfully....")
   };
+  
   return (
     <div>
       <Modal
@@ -122,23 +151,20 @@ function PostModal({ modalIsOpen, setIsOpen, modalPost, setModalPost }) {
                 {modalPost.post.caption}
               </p>
             </div>
-
-            <div className="post-info__buttons">
-              <PictureButtons
-                id={modalPost.id}
-                likes={modalPost.post.likes}
-                likedStatus={postLike}
-              />
+                
+            <div className="post-info__buttons">         
               <p>
-                {postLike ? modalPost.post.likes + 1 : modalPost.post.likes}{" "}
+                {getLikes()}{likes}{" "}
                 likes
               </p>
+              {console.log(modalPost)}
             </div>
             <div className="separator"></div>
 
             <div className="post-info__comments">
               <p>
-                {modalPost.post.comments?.map((comment) => (
+                {postComments[0]?.comments?.map((comment) => (
+                  
                   <p>
                     <strong>{comment.sender} </strong>
                     {comment.comment}
@@ -172,3 +198,4 @@ function PostModal({ modalIsOpen, setIsOpen, modalPost, setModalPost }) {
 }
 
 export default PostModal;
+
